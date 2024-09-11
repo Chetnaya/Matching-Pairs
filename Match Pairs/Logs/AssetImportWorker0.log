@@ -249,3 +249,35 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
   custom:CustomObjectIndexerAttribute: 6d391050e5a25f67b0a2c618074f2cd9 -> 
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 727953.245239 seconds.
+  path: Assets/Images
+  artifactKey: Guid(2342293e62f73ab4da2ed7f2ab039c96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images using Guid(2342293e62f73ab4da2ed7f2ab039c96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'faa1e60d9bc37eb20852d138f13033a0') in 0.010807 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.750087 seconds.
+  path: Assets/Sprites/Cards
+  artifactKey: Guid(68947aa0b20f80f4593f4d093bbd4aa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Cards using Guid(68947aa0b20f80f4593f4d093bbd4aa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0aca4511193ab107ecbca82095f3395b') in 0.000907 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 5.827365 seconds.
+  path: Assets/Scripts/_Card.cs
+  artifactKey: Guid(07ead838e32e3754bb3c4833895c1ad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/_Card.cs using Guid(07ead838e32e3754bb3c4833895c1ad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7734e640debe344a392674e51b9cd9a0') in 0.000748 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 32.442868 seconds.
+  path: Assets/Scripts/_CardGameManager.cs
+  artifactKey: Guid(8fd7fcbafdce824489b4f489f509de97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/_CardGameManager.cs using Guid(8fd7fcbafdce824489b4f489f509de97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b4b06319241301b6e8f6e350be8947f') in 0.001784 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
