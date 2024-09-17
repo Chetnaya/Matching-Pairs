@@ -45,6 +45,10 @@ public class _CardGameManager : MonoBehaviour
     private int cardLeft;
     private bool gameStart;
 
+    [SerializeField]
+    private GameObject Mainmenu;
+
+
     void Awake()
     {
         Instance = this;
@@ -79,6 +83,8 @@ public class _CardGameManager : MonoBehaviour
         SpriteCardAllocation();
         StartCoroutine(HideFace());
         time = 0;
+        
+        Mainmenu.SetActive(false);
     }
 
     // Initialize cards, size, and position based on size of game
@@ -262,6 +268,7 @@ public class _CardGameManager : MonoBehaviour
     {
         gameStart = false;
         panel.SetActive(false);
+        Mainmenu.SetActive(true);
     }
     public void GiveUp()
     {
