@@ -1172,6 +1172,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 73ac85d2969ca9a44bb09250799b4123, type: 3}
   panel: {fileID: 225471178}
   info: {fileID: 664691701}
+  infoPanel: {fileID: 1919264564}
   spritePreload: {fileID: 899609023}
   sizeLabel: {fileID: 1429668448}
   sizeSlider: {fileID: 63009308}

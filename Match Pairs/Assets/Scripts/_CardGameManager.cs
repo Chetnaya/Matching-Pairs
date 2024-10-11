@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPpro;
 
 public class _CardGameManager : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class _CardGameManager : MonoBehaviour
     private GameObject panel;
     [SerializeField]
     private GameObject info;
+
+    [SerializeField]
+    private GameObject infoPanel;
+
     // for preloading
     [SerializeField]
     private _Card spritePreload;
@@ -38,6 +43,10 @@ public class _CardGameManager : MonoBehaviour
     private Slider sizeSlider;
     [SerializeField]
     private Text timeLabel;
+
+    [SerializeField]
+    /*private tmppro timeLabel;*/
+
     private float time;
 
     private int spriteSelected;
@@ -70,20 +79,42 @@ public class _CardGameManager : MonoBehaviour
     public void StartCardGame()
     {
         if (gameStart) return; // return if game already running
+        StartCoroutine(ShowInstructionsBeforeGame());
+    }
+
+    // Coroutine to show the instruction panel for 5 seconds before starting the game
+    private IEnumerator ShowInstructionsBeforeGame()
+    {
+        // Show the instruction panel
+        infoPanel.SetActive(true);
+
+        // Wait for 5 seconds
+        yield return new WaitForSeconds(5.0f);
+
+        // Hide the instruction panel and proceed to start the game
+        infoPanel.SetActive(false);
+
         gameStart = true;
-        // toggle UI
+
+        // Toggle UI
         panel.SetActive(true);
-        info.SetActive(false);
-        // set cards, size, position
+
+        // Set cards, size, and position
         SetGamePanel();
-        // renew gameplay variables
+
+        // Renew gameplay variables
         cardSelected = spriteSelected = -1;
         cardLeft = cards.Length;
-        // allocate sprite to card
+
+        // Allocate sprite to cards
         SpriteCardAllocation();
+
+        // Start hiding the card faces
         StartCoroutine(HideFace());
+
         time = 0;
-        
+
+        // Hide the main menu
         Mainmenu.SetActive(false);
     }
 
