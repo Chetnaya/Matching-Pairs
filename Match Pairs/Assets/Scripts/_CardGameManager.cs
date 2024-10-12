@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[System.Serializable]
+public class Sentences
+{
+    public List<string> sentences;
+}
 public class _CardGameManager : MonoBehaviour
 {
 
@@ -45,6 +50,7 @@ public class _CardGameManager : MonoBehaviour
     private Text timeLabel;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI gameStartingInfoText;
+    [SerializeField] private TextMeshProUGUI encouragingSentenceText;
 
     public GameObject skipButton;
 
@@ -140,6 +146,7 @@ public class _CardGameManager : MonoBehaviour
         StartCoroutine(HideFace());
         time = 0;
         Mainmenu.SetActive(false);
+        DisplayRandomEncouragingSentence();
     }
 
     public void InterruptCountdown()
@@ -171,6 +178,19 @@ public class _CardGameManager : MonoBehaviour
         timerText.gameObject.SetActive(false);
         skipButton.SetActive(false);
     }
+
+    private void DisplayRandomEncouragingSentence()
+    {
+        string json = Resources.Load<TextAsset>("encouraging_sentences").text;
+        Sentences sentences = JsonUtility.FromJson<Sentences>(json);
+
+        // Select a random sentence from the list
+        string randomSentence = sentences.sentences[Random.Range(0, sentences.sentences.Count)];
+
+        // Display the sentence in the UI
+        encouragingSentenceText.text = randomSentence;
+    }
+
     private void PreloadCardImage()
     {
         for (int i = 0; i < sprites.Length; i++)
