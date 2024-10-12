@@ -6,6 +6,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject exitButton; 
     [SerializeField] private GameObject instructionPanel;
+    [SerializeField] private GameObject musicOnButton;
+    [SerializeField] private GameObject musicOffButton; 
 
     void Start()
     {
@@ -18,8 +20,37 @@ public class UIManager : MonoBehaviour
 
         // Initially hide the instruction panel
         instructionPanel.SetActive(false);
+
+        // Ensure buttons are correctly set based on the initial state of background music
+        if (AudioPlayer.Instance.BackgroundMusic.isPlaying)
+        {
+            SetMusicOnState(true);
+        }
+        else
+        {
+            SetMusicOnState(false);
+        }
+    }
+    // Method to handle the Music On button click
+    public void OnMusicOnButtonClick()
+    {
+        SetMusicOnState(false); // Switch to Music Off state
+        AudioPlayer.Instance.BackgroundMusic.mute = true; // Mute music
     }
 
+    // Method to handle the Music Off button click
+    public void OnMusicOffButtonClick()
+    {
+        SetMusicOnState(true); // Switch to Music On state
+        AudioPlayer.Instance.BackgroundMusic.mute = false; // Unmute music
+    }
+
+    // Helper method to toggle between Music On and Off states
+    private void SetMusicOnState(bool isOn)
+    {
+        musicOnButton.SetActive(isOn);
+        musicOffButton.SetActive(!isOn);
+    }
     // Call this method when the exit button is clicked
     public void OnExitButtonClick()
     {

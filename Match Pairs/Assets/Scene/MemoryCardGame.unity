@@ -1679,6 +1679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitButton: {fileID: 759119625}
   instructionPanel: {fileID: 1919264564}
+  musicOnButton: {fileID: 1200546339}
+  musicOffButton: {fileID: 1038088133}
 --- !u!1 &899609022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2057,7 @@ MonoBehaviour:
   audio:
   - {fileID: 8300000, guid: d9f4077641fec7542b219c2194f7c36e, type: 3}
   - {fileID: 8300000, guid: 6dfbefc03ba841b4b9dd879cecfb813e, type: 3}
+  BackgroundMusic: {fileID: 7077235}
 --- !u!82 &1005890896
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2232,7 +2235,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1038088136}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 850287656}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnMusicOffButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1038088136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2838,7 +2853,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1200546342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 850287656}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OnMusicOnButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1200546342
 MonoBehaviour:
   m_ObjectHideFlags: 0
