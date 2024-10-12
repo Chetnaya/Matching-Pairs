@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPpro;
+using TMPro;
 
 public class _CardGameManager : MonoBehaviour
 {
@@ -43,12 +43,13 @@ public class _CardGameManager : MonoBehaviour
     private Slider sizeSlider;
     [SerializeField]
     private Text timeLabel;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI gameStartingInfoText;
 
     [SerializeField]
     /*private tmppro timeLabel;*/
 
     private float time;
-
     private int spriteSelected;
     private int cardSelected;
     private int cardLeft;
@@ -66,6 +67,8 @@ public class _CardGameManager : MonoBehaviour
     {
         gameStart = false;
         panel.SetActive(false);
+        timerText.gameObject.SetActive(false);
+        gameStartingInfoText.gameObject.SetActive(false);
     }
     // Purpose is to allow preloading of panel, so that it does not lag when it loads
     // Call this in the start method to preload all sprites at start of the script
@@ -87,12 +90,20 @@ public class _CardGameManager : MonoBehaviour
     {
         // Show the instruction panel
         infoPanel.SetActive(true);
+        gameStartingInfoText.gameObject.SetActive(true);
+        timerText.gameObject.SetActive(true);
 
-        // Wait for 5 seconds
-        yield return new WaitForSeconds(5.0f);
+        // Countdown from 5 to 1
+        for (int i = 5; i > 0; i--)
+        {
+            timerText.text = i.ToString(); // Update the timer text
+            yield return new WaitForSeconds(1.0f); // Wait for 1 second
+        }
 
-        // Hide the instruction panel and proceed to start the game
+        // Hide the instruction panel and timer text
         infoPanel.SetActive(false);
+        gameStartingInfoText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
 
         gameStart = true;
 
