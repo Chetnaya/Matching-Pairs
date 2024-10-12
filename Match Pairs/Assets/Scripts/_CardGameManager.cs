@@ -46,6 +46,8 @@ public class _CardGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI gameStartingInfoText;
 
+    public GameObject skipButton;
+
     [SerializeField]
     /*private tmppro timeLabel;*/
 
@@ -78,6 +80,7 @@ public class _CardGameManager : MonoBehaviour
     {
         timerText.gameObject.SetActive(false);
         gameStartingInfoText.gameObject.SetActive(false);
+        skipButton.SetActive(false);
         timerText.text = "5"; // Reset timer text to 5
     }
 
@@ -102,6 +105,7 @@ public class _CardGameManager : MonoBehaviour
         infoPanel.SetActive(true);
         gameStartingInfoText.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
+        skipButton.SetActive(true);
 
         for (int i = 5; i > 0; i--)
         {
@@ -120,6 +124,7 @@ public class _CardGameManager : MonoBehaviour
         infoPanel.SetActive(false);
         gameStartingInfoText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
+        skipButton.SetActive(false);
 
         StartGame();
     }
@@ -147,7 +152,25 @@ public class _CardGameManager : MonoBehaviour
         ResetUIElements();
         infoPanel.SetActive(false);
     }
+    // This method is called when the skip button is clicked
+    public void SkipCountdownAndStartGame()
+    {
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine); // Stop the countdown
+        }
 
+        HideCountdownUI();
+        StartGame();
+    }
+    // Helper method to hide countdown-related UI elements
+    private void HideCountdownUI()
+    {
+        infoPanel.SetActive(false);
+        gameStartingInfoText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
+        skipButton.SetActive(false);
+    }
     private void PreloadCardImage()
     {
         for (int i = 0; i < sprites.Length; i++)

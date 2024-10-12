@@ -39,4 +39,10 @@ public class UIManager : MonoBehaviour
     {
         _CardGameManager.Instance.InterruptCountdown();
     }
+
+    // Skip the countdown and start the game immediately
+    public void OnSkipButtonClick()
+    {
+        _CardGameManager.Instance.SkipCountdownAndStartGame();
+    }
 }
