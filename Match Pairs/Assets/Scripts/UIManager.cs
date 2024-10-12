@@ -37,6 +37,6 @@ public class UIManager : MonoBehaviour
     // Call this method when the back button on the instruction panel is clicked
     public void OnInstructionsBackBtnClick()
     {
-        instructionPanel.SetActive(false); // Hide the instructions panel
+        _CardGameManager.Instance.InterruptCountdown();
     }
 }

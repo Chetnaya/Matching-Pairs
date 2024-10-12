@@ -54,6 +54,9 @@ public class _CardGameManager : MonoBehaviour
     private int cardSelected;
     private int cardLeft;
     private bool gameStart;
+    private bool countdownInterrupted;
+
+    private Coroutine countdownCoroutine;
 
     [SerializeField]
     private GameObject Mainmenu;
@@ -66,68 +69,92 @@ public class _CardGameManager : MonoBehaviour
     void Start()
     {
         gameStart = false;
+        countdownInterrupted = false;
         panel.SetActive(false);
+        ResetUIElements();
+    }
+
+    private void ResetUIElements()
+    {
         timerText.gameObject.SetActive(false);
         gameStartingInfoText.gameObject.SetActive(false);
+        timerText.text = "5"; // Reset timer text to 5
     }
-    // Purpose is to allow preloading of panel, so that it does not lag when it loads
-    // Call this in the start method to preload all sprites at start of the script
+
+    public void StartCardGame()
+    {
+        if (gameStart) return;
+
+        // If a countdown coroutine is already running, stop it
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+        }
+
+        // Start the new countdown coroutine
+        countdownCoroutine = StartCoroutine(ShowInstructionsBeforeGame());
+    }
+
+    private IEnumerator ShowInstructionsBeforeGame()
+    {
+        countdownInterrupted = false;
+
+        infoPanel.SetActive(true);
+        gameStartingInfoText.gameObject.SetActive(true);
+        timerText.gameObject.SetActive(true);
+
+        for (int i = 5; i > 0; i--)
+        {
+            if (countdownInterrupted)
+            {
+                ResetUIElements();
+                yield break; // Exit the coroutine if interrupted
+            }
+
+            timerText.text = i.ToString();
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        if (countdownInterrupted) yield break;
+
+        infoPanel.SetActive(false);
+        gameStartingInfoText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
+
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        gameStart = true;
+        panel.SetActive(true);
+        SetGamePanel();
+        cardSelected = spriteSelected = -1;
+        cardLeft = cards.Length;
+        SpriteCardAllocation();
+        StartCoroutine(HideFace());
+        time = 0;
+        Mainmenu.SetActive(false);
+    }
+
+    public void InterruptCountdown()
+    {
+        countdownInterrupted = true;
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine); // Stop the coroutine if running
+        }
+        ResetUIElements();
+        infoPanel.SetActive(false);
+    }
+
     private void PreloadCardImage()
     {
         for (int i = 0; i < sprites.Length; i++)
             spritePreload.SpriteID = i;
         spritePreload.gameObject.SetActive(false);
     }
-    // Start a game
-    public void StartCardGame()
-    {
-        if (gameStart) return; // return if game already running
-        StartCoroutine(ShowInstructionsBeforeGame());
-    }
 
-    // Coroutine to show the instruction panel for 5 seconds before starting the game
-    private IEnumerator ShowInstructionsBeforeGame()
-    {
-        // Show the instruction panel
-        infoPanel.SetActive(true);
-        gameStartingInfoText.gameObject.SetActive(true);
-        timerText.gameObject.SetActive(true);
-
-        // Countdown from 5 to 1
-        for (int i = 5; i > 0; i--)
-        {
-            timerText.text = i.ToString(); // Update the timer text
-            yield return new WaitForSeconds(1.0f); // Wait for 1 second
-        }
-
-        // Hide the instruction panel and timer text
-        infoPanel.SetActive(false);
-        gameStartingInfoText.gameObject.SetActive(false);
-        timerText.gameObject.SetActive(false);
-
-        gameStart = true;
-
-        // Toggle UI
-        panel.SetActive(true);
-
-        // Set cards, size, and position
-        SetGamePanel();
-
-        // Renew gameplay variables
-        cardSelected = spriteSelected = -1;
-        cardLeft = cards.Length;
-
-        // Allocate sprite to cards
-        SpriteCardAllocation();
-
-        // Start hiding the card faces
-        StartCoroutine(HideFace());
-
-        time = 0;
-
-        // Hide the main menu
-        Mainmenu.SetActive(false);
-    }
 
     // Initialize cards, size, and position based on size of game
     private void SetGamePanel(){
